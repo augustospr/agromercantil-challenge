@@ -1,0 +1,8 @@
+{
+  "helloWorld": "Hello World",
+  "errorBoundary": {
+    "title": "Something went wrong!",
+    "reload": "Reload page"
+  }
+}
+

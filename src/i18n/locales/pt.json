@@ -1,0 +1,8 @@
+{
+  "helloWorld": "Olá Mundo",
+  "errorBoundary": {
+    "title": "Algo deu errado!",
+    "reload": "Recarregar página"
+  }
+}
+
