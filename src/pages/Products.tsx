@@ -1,50 +1,43 @@
-import { useEffect, useState } from 'react'
+import { useEffect } from 'react'
 
 import ProductForm from '@/components/ProductForm'
 import ProductTable from '@/components/ProductTable'
-import { deleteProduct, fetchProducts } from '@/services/api'
-import type { Product, ProductFormData } from '@/types/product'
+import { useAppDispatch, useAppSelector } from '@/store/hooks'
+import {
+  addProduct,
+  clearError,
+  deleteProductAsync,
+  fetchProductsAsync,
+} from '@/store/slices/productsSlice'
+import type { ProductFormData } from '@/types/product'
 
 export default function Products() {
-  const [products, setProducts] = useState<Product[]>([])
-  const [loading, setLoading] = useState<boolean>(true)
-  const [error, setError] = useState<string | null>(null)
+  const dispatch = useAppDispatch()
+  const {
+    items: products,
+    loading,
+    error,
+  } = useAppSelector(state => state.products)
 
   useEffect(() => {
-    loadProducts()
-  }, [])
+    dispatch(fetchProductsAsync())
+  }, [dispatch])
 
-  const loadProducts = async () => {
-    try {
-      setLoading(true)
-      setError(null)
-      const data = await fetchProducts()
-      setProducts(data)
-    } catch (err) {
-      setError('Erro ao carregar produtos. Tente novamente.')
-      console.error('Error loading products:', err)
-    } finally {
-      setLoading(false)
-    }
-  }
-
-  const handleDelete = async (id: number) => {
-    try {
-      await deleteProduct(id)
-      setProducts(prev => prev.filter(p => p.id !== id))
-    } catch (err) {
-      setError('Erro ao excluir produto. Tente novamente.')
-      console.error('Error deleting product:', err)
-    }
+  const handleDelete = (id: number) => {
+    dispatch(deleteProductAsync(id))
   }
 
   const handleAdd = (formData: ProductFormData) => {
-    const newProduct: Product = {
-      id: Date.now(), // Gera ID temporário baseado em timestamp
+    const newProduct = {
+      id: Date.now(),
       name: formData.name,
       price: formData.price,
     }
-    setProducts(prev => [...prev, newProduct])
+    dispatch(addProduct(newProduct))
+  }
+
+  const handleClearError = () => {
+    dispatch(clearError())
   }
 
   if (loading) {
@@ -75,7 +68,7 @@ export default function Products() {
             <div className="flex items-start justify-between">
               <span className="flex-1">{error}</span>
               <button
-                onClick={() => setError(null)}
+                onClick={handleClearError}
                 className="ml-4 text-red-600 hover:text-red-800 focus:outline-none focus:ring-2 focus:ring-red-500 rounded transition-colors duration-150"
                 aria-label="Fechar mensagem de erro"
               >

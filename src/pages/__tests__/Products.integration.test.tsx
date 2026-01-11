@@ -1,9 +1,11 @@
 import { render, screen, waitFor } from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
+import { Provider } from 'react-redux'
 import { BrowserRouter } from 'react-router-dom'
 import { beforeEach, describe, expect, it, vi } from 'vitest'
 
 import * as api from '@/services/api'
+import { store } from '@/store/store'
 import type { Product } from '@/types/product'
 
 import Products from '../Products'
@@ -17,7 +19,9 @@ const mockFetchProducts = vi.mocked(api.fetchProducts)
 const mockDeleteProduct = vi.mocked(api.deleteProduct)
 
 const Wrapper = ({ children }: { children: React.ReactNode }) => (
-  <BrowserRouter>{children}</BrowserRouter>
+  <Provider store={store}>
+    <BrowserRouter>{children}</BrowserRouter>
+  </Provider>
 )
 
 describe('Products - Testes de Integração', () => {

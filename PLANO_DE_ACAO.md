@@ -178,39 +178,40 @@ src/
 ---
 
 ### ✅ Questão 6: Gerenciamento de Estado Global (Redux Toolkit)
-**Status:** 🔴 Pendente
+**Status:** ✅ Concluída
 
 #### Objetivos:
-- Refatorar aplicação para usar Redux Toolkit
-- Manter funcionalidades de exibir, excluir e adicionar produtos
-- Substituir estado local por estado global
+- ✅ Refatorar aplicação para usar Redux Toolkit
+- ✅ Manter funcionalidades de exibir, excluir e adicionar produtos
+- ✅ Substituir estado local por estado global
 
 #### Tarefas:
 1. **Instalar dependências**
-   - [ ] Instalar `@reduxjs/toolkit` e `react-redux`
-   - [ ] Instalar tipos TypeScript se necessário
+   - [x] Instalar `@reduxjs/toolkit` e `react-redux`
+   - [x] Verificar compatibilidade com React 19
 
 2. **Configurar Redux Store**
-   - [ ] Criar `src/store/store.ts`
-   - [ ] Configurar store com `configureStore`
-   - [ ] Criar `src/store/hooks.ts` para typed hooks
+   - [x] Criar `src/store/store.ts`
+   - [x] Configurar store com `configureStore`
+   - [x] Criar `src/store/hooks.ts` para typed hooks (useAppDispatch, useAppSelector)
+   - [x] Criar tipos TypeScript (RootState, AppDispatch)
 
 3. **Criar Slice de Produtos**
-   - [ ] Criar `src/store/slices/productsSlice.ts`
-   - [ ] Definir estado inicial (products, loading, error)
-   - [ ] Criar reducers: `setProducts`, `addProduct`, `removeProduct`, `setLoading`, `setError`
-   - [ ] Criar async thunks: `fetchProducts`, `deleteProduct`
+   - [x] Criar `src/store/slices/productsSlice.ts`
+   - [x] Definir estado inicial (items, loading, error)
+   - [x] Criar reducers: `addProduct`, `clearError`
+   - [x] Criar async thunks: `fetchProductsAsync`, `deleteProductAsync`
+   - [x] Configurar extraReducers para estados pending/fulfilled/rejected
 
 4. **Refatorar componentes**
-   - [ ] Substituir `useState` por `useSelector` e `useDispatch`
-   - [ ] Atualizar `ProductTable` para usar Redux
-   - [ ] Atualizar `ProductForm` para usar Redux
-   - [ ] Atualizar página principal para usar Redux
+   - [x] Substituir `useState` por `useAppSelector` e `useAppDispatch`
+   - [x] Atualizar `Products.tsx` para usar Redux
+   - [x] Manter `ProductTable` e `ProductForm` como componentes "burros" (recebem props)
 
-5. **Manter funcionalidades**
-   - [ ] Verificar que exibir produtos ainda funciona
-   - [ ] Verificar que excluir produtos ainda funciona
-   - [ ] Verificar que adicionar produtos ainda funciona
+5. **Adicionar Provider e Testes**
+   - [x] Envolver App com `<Provider store={store}>`
+   - [x] Atualizar testes para incluir Provider
+   - [x] Verificar que todos os 22 testes passam
 
 #### Estrutura de Arquivos:
 ```
@@ -522,9 +523,10 @@ src/
 2. ✅ Questão 1 (Interface Básica) - CONCLUÍDA
 3. ✅ Questão 3 (Testes Unitários) - CONCLUÍDA
 4. ✅ Questão 5 (Estilização Responsiva) - CONCLUÍDA
-5. ⬜ Questão 6 (Redux Toolkit) - PRÓXIMA
+5. ✅ Questão 6 (Redux Toolkit) - CONCLUÍDA
+6. ⬜ Questão 4 (Front-End): Integração com Autenticação JWT - PRÓXIMA
 
 ---
 
 **Última atualização:** 2025-01-XX
-**Status geral:** 🟡 Em progresso - Questões 1, 3 e 5 concluídas
+**Status geral:** 🟡 Em progresso - Questões 1, 3, 5 e 6 concluídas
