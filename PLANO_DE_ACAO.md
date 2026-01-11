@@ -11,50 +11,50 @@ Este documento apresenta o plano de ação para implementar a parte **front-end*
 ## 🎯 Questões do Front-End
 
 ### ✅ Questão 1: Construção de Interface em React
-**Status:** 🔴 Pendente
+**Status:** ✅ Concluída
 
 #### Objetivos:
-- Criar aplicação React que consome API REST fictícia
-- Exibir lista de produtos em tabela (Nome, Preço, Ações)
-- Implementar exclusão de produtos
-- Adicionar botão para criar novos produtos (sem conectar à API)
-- Usar hooks: `useState`, `useEffect`
+- ✅ Criar aplicação React que consome API REST fictícia
+- ✅ Exibir lista de produtos em tabela (Nome, Preço, Ações)
+- ✅ Implementar exclusão de produtos
+- ✅ Adicionar botão para criar novos produtos (sem conectar à API)
+- ✅ Usar hooks: `useState`, `useEffect`
 
 #### Tarefas:
 1. **Criar estrutura de tipos/interfaces**
-   - [ ] Definir interface `Product` (id, name, price)
-   - [ ] Criar tipos para estados e props
+   - [x] Definir interface `Product` (id, name, price)
+   - [x] Criar tipos para estados e props
 
 2. **Criar serviço de API**
-   - [ ] Criar `src/services/api.ts` ou `src/api/products.ts`
-   - [ ] Implementar função `fetchProducts()` que simula chamada GET /api/products
-   - [ ] Implementar função `deleteProduct(id)` que simula DELETE
-   - [ ] Usar dados mockados inicialmente (pode ser substituído depois)
+   - [x] Criar `src/services/api.ts` ou `src/api/products.ts`
+   - [x] Implementar função `fetchProducts()` que simula chamada GET /api/products
+   - [x] Implementar função `deleteProduct(id)` que simula DELETE
+   - [x] Usar dados mockados inicialmente (pode ser substituído depois)
 
 3. **Criar componente de Tabela de Produtos**
-   - [ ] Criar `src/components/ProductTable.tsx`
-   - [ ] Exibir colunas: Nome, Preço, Ações
-   - [ ] Formatar preço como moeda (R$)
-   - [ ] Adicionar botão de exclusão em cada linha
+   - [x] Criar `src/components/ProductTable.tsx`
+   - [x] Exibir colunas: Nome, Preço, Ações
+   - [x] Formatar preço como moeda (R$)
+   - [x] Adicionar botão de exclusão em cada linha
 
 4. **Criar componente de Formulário de Produto**
-   - [ ] Criar `src/components/ProductForm.tsx`
-   - [ ] Campos: Nome (input text), Preço (input number)
-   - [ ] Validação básica (campos obrigatórios)
-   - [ ] Botão de submit
+   - [x] Criar `src/components/ProductForm.tsx`
+   - [x] Campos: Nome (input text), Preço (input number)
+   - [x] Validação básica (campos obrigatórios)
+   - [x] Botão de submit
 
 5. **Criar página/componente principal**
-   - [ ] Criar `src/pages/Products.tsx` ou modificar `Home.tsx`
-   - [ ] Gerenciar estado com `useState` (lista de produtos, loading, error)
-   - [ ] Usar `useEffect` para carregar produtos ao montar componente
-   - [ ] Integrar tabela e formulário
-   - [ ] Implementar handlers: `handleDelete`, `handleAdd`
+   - [x] Criar `src/pages/Products.tsx` ou modificar `Home.tsx`
+   - [x] Gerenciar estado com `useState` (lista de produtos, loading, error)
+   - [x] Usar `useEffect` para carregar produtos ao montar componente
+   - [x] Integrar tabela e formulário
+   - [x] Implementar handlers: `handleDelete`, `handleAdd`
 
 6. **Gerenciamento de estado local**
-   - [ ] Estado para lista de produtos
-   - [ ] Estado para loading
-   - [ ] Estado para erros
-   - [ ] Estado para formulário (controlado)
+   - [x] Estado para lista de produtos
+   - [x] Estado para loading
+   - [x] Estado para erros
+   - [x] Estado para formulário (controlado)
 
 #### Estrutura de Arquivos:
 ```
@@ -74,43 +74,50 @@ src/
 ---
 
 ### ✅ Questão 3: Teste de Componentes em React
-**Status:** 🔴 Pendente
+**Status:** ✅ Concluída
 
 #### Objetivos:
-- Escrever testes unitários usando Jest e React Testing Library
-- Garantir que tabela exibe produtos corretamente
-- Testar exclusão de produtos
-- Testar adição de novos produtos
+- ✅ Escrever testes unitários usando Vitest e React Testing Library
+- ✅ Garantir que tabela exibe produtos corretamente
+- ✅ Testar exclusão de produtos
+- ✅ Testar adição de novos produtos
 
 #### Tarefas:
 1. **Configurar ambiente de testes**
-   - [ ] Verificar se Jest e React Testing Library estão instalados
-   - [ ] Configurar `vitest` (se usando Vite) ou Jest
-   - [ ] Criar arquivo de configuração de testes
-   - [ ] Configurar setup de testes
+   - [x] Verificar se Jest e React Testing Library estão instalados
+   - [x] Configurar `vitest` (compatível com Vite)
+   - [x] Criar arquivo de configuração de testes (`vitest.config.ts`)
+   - [x] Configurar setup de testes (`src/test/setup.ts`)
 
 2. **Testes para ProductTable**
-   - [ ] Teste: renderiza tabela com produtos
-   - [ ] Teste: exibe nome e preço corretamente
-   - [ ] Teste: botão de excluir está presente
-   - [ ] Teste: chama função de exclusão ao clicar no botão
+   - [x] Teste: renderiza tabela com produtos
+   - [x] Teste: exibe nome e preço corretamente
+   - [x] Teste: exibe mensagem quando não há produtos
+   - [x] Teste: botão de excluir está presente
+   - [x] Teste: chama função de exclusão ao clicar no botão
+   - [x] Teste: chama função com ID correto
 
 3. **Testes para ProductForm**
-   - [ ] Teste: renderiza campos de formulário
-   - [ ] Teste: permite inserir nome e preço
-   - [ ] Teste: valida campos obrigatórios
-   - [ ] Teste: chama função de submit com dados corretos
+   - [x] Teste: renderiza campos de formulário
+   - [x] Teste: permite inserir nome e preço
+   - [x] Teste: valida campos obrigatórios (nome vazio)
+   - [x] Teste: valida campos obrigatórios (preço inválido)
+   - [x] Teste: chama função de submit com dados corretos
+   - [x] Teste: limpa formulário após submit
+   - [x] Teste: limpa erro quando usuário digita
 
 4. **Testes para página principal (Products)**
-   - [ ] Teste: carrega produtos ao montar
-   - [ ] Teste: exibe loading durante requisição
-   - [ ] Teste: exibe erro se requisição falhar
-   - [ ] Teste: adiciona novo produto à lista
-   - [ ] Teste: remove produto da lista
+   - [x] Teste: carrega produtos ao montar
+   - [x] Teste: exibe loading durante requisição
+   - [x] Teste: exibe erro se requisição falhar
+   - [x] Teste: adiciona novo produto à lista
+   - [x] Teste: remove produto da lista
+   - [x] Teste: exibe erro ao falhar exclusão
 
 5. **Testes de integração**
-   - [ ] Teste: fluxo completo de adicionar produto
-   - [ ] Teste: fluxo completo de excluir produto
+   - [x] Teste: fluxo completo de adicionar produto
+   - [x] Teste: fluxo completo de excluir produto
+   - [x] Teste: fluxo completo de adicionar e depois excluir produto
 
 #### Estrutura de Arquivos:
 ```
@@ -509,11 +516,12 @@ src/
 ## 🚀 Próximos Passos Imediatos
 
 1. ✅ Criar este plano de ação
-2. ⬜ Começar pela Questão 1 (Interface Básica)
-3. ⬜ Configurar estrutura de pastas
-4. ⬜ Implementar componentes básicos
+2. ✅ Questão 1 (Interface Básica) - CONCLUÍDA
+3. ✅ Questão 3 (Testes Unitários) - CONCLUÍDA
+4. ⬜ Questão 5 (Estilização Responsiva) - PRÓXIMA
+5. ⬜ Questão 6 (Redux Toolkit)
 
 ---
 
-**Última atualização:** [Data de criação do plano]
-**Status geral:** 🔴 Em planejamento
+**Última atualização:** 2025-01-XX
+**Status geral:** 🟡 Em progresso - Questões 1 e 3 concluídas
