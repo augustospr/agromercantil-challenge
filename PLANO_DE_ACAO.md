@@ -134,34 +134,37 @@ src/
 ---
 
 ### ✅ Questão 5: Estilização Responsiva
-**Status:** 🔴 Pendente
+**Status:** ✅ Concluída
 
 #### Objetivos:
-- Adicionar estilos responsivos à aplicação
-- Usar CSS ou biblioteca (TailwindCSS já está configurado)
-- Garantir que tabela funcione em desktop, tablet e mobile
+- ✅ Adicionar estilos responsivos à aplicação
+- ✅ Usar TailwindCSS (já configurado)
+- ✅ Garantir que tabela funcione em desktop, tablet e mobile
 
 #### Tarefas:
 1. **Estilizar tabela responsiva**
-   - [ ] Desktop: tabela completa com todas as colunas
-   - [ ] Tablet: ajustar largura e espaçamento
-   - [ ] Mobile: converter tabela em cards ou lista vertical
-   - [ ] Usar breakpoints do TailwindCSS (sm, md, lg, xl)
+   - [x] Desktop: tabela completa com todas as colunas (hidden md:block)
+   - [x] Tablet: ajustar largura e espaçamento (px-4 md:px-6)
+   - [x] Mobile: converter tabela em cards (md:hidden com cards)
+   - [x] Usar breakpoints do TailwindCSS (sm, md, lg, xl)
 
 2. **Estilizar formulário**
-   - [ ] Layout responsivo para campos
-   - [ ] Botões com tamanho adequado para touch
-   - [ ] Espaçamento adequado em diferentes telas
+   - [x] Layout responsivo para campos (p-4 sm:p-6, px-3 sm:px-4)
+   - [x] Botões com tamanho adequado para touch (py-2.5)
+   - [x] Espaçamento adequado em diferentes telas
 
 3. **Melhorias de UX**
-   - [ ] Adicionar estados de hover/focus
-   - [ ] Feedback visual para ações (loading, sucesso, erro)
-   - [ ] Animações sutis para transições
+   - [x] Adicionar estados de hover/focus (hover:bg-gray-50, hover:shadow-md)
+   - [x] Feedback visual para ações (loading com spinner, animações)
+   - [x] Animações sutis para transições (transition-all duration-150)
+   - [x] Estados active para botões (active:bg-red-700)
+   - [x] Transformações no hover (hover:-translate-y-0.5)
 
-4. **Testes de responsividade**
-   - [ ] Testar em diferentes tamanhos de tela
-   - [ ] Usar DevTools do navegador para simular dispositivos
-   - [ ] Verificar acessibilidade básica
+4. **Layout da página**
+   - [x] Grid responsivo (grid-cols-1 lg:grid-cols-3)
+   - [x] Ordem ajustada para mobile (order-2 lg:order-1)
+   - [x] Títulos responsivos (text-2xl sm:text-3xl lg:text-4xl)
+   - [x] Padding responsivo (py-4 sm:py-6 lg:py-8)
 
 #### Estrutura de Arquivos:
 ```
@@ -518,10 +521,10 @@ src/
 1. ✅ Criar este plano de ação
 2. ✅ Questão 1 (Interface Básica) - CONCLUÍDA
 3. ✅ Questão 3 (Testes Unitários) - CONCLUÍDA
-4. ⬜ Questão 5 (Estilização Responsiva) - PRÓXIMA
-5. ⬜ Questão 6 (Redux Toolkit)
+4. ✅ Questão 5 (Estilização Responsiva) - CONCLUÍDA
+5. ⬜ Questão 6 (Redux Toolkit) - PRÓXIMA
 
 ---
 
 **Última atualização:** 2025-01-XX
-**Status geral:** 🟡 Em progresso - Questões 1 e 3 concluídas
+**Status geral:** 🟡 Em progresso - Questões 1, 3 e 5 concluídas

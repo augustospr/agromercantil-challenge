@@ -42,7 +42,7 @@ describe('Products', () => {
     expect(screen.getByText('Carregando produtos...')).toBeInTheDocument()
 
     await waitFor(() => {
-      expect(screen.getByText('Produto 1')).toBeInTheDocument()
+      expect(screen.getAllByText('Produto 1').length).toBeGreaterThan(0)
     })
 
     expect(mockFetchProducts).toHaveBeenCalledTimes(1)
@@ -97,7 +97,7 @@ describe('Products', () => {
     )
 
     await waitFor(() => {
-      expect(screen.getByText('Produto 1')).toBeInTheDocument()
+      expect(screen.getAllByText('Produto 1').length).toBeGreaterThan(0)
     })
 
     const user = userEvent.setup()
@@ -113,12 +113,12 @@ describe('Products', () => {
     await user.click(submitButton)
 
     await waitFor(() => {
-      expect(screen.getByText('Produto Novo')).toBeInTheDocument()
+      expect(screen.getAllByText('Produto Novo').length).toBeGreaterThan(0)
     })
 
-    expect(screen.getByText('Produto 1')).toBeInTheDocument()
-    expect(screen.getByText('Produto 2')).toBeInTheDocument()
-    expect(screen.getByText('Produto Novo')).toBeInTheDocument()
+    expect(screen.getAllByText('Produto 1').length).toBeGreaterThan(0)
+    expect(screen.getAllByText('Produto 2').length).toBeGreaterThan(0)
+    expect(screen.getAllByText('Produto Novo').length).toBeGreaterThan(0)
   })
 
   it('remove produto da lista', async () => {
@@ -132,7 +132,7 @@ describe('Products', () => {
     )
 
     await waitFor(() => {
-      expect(screen.getByText('Produto 1')).toBeInTheDocument()
+      expect(screen.getAllByText('Produto 1').length).toBeGreaterThan(0)
     })
 
     const user = userEvent.setup()
@@ -143,7 +143,7 @@ describe('Products', () => {
       expect(screen.queryByText('Produto 1')).not.toBeInTheDocument()
     })
 
-    expect(screen.getByText('Produto 2')).toBeInTheDocument()
+    expect(screen.getAllByText('Produto 2').length).toBeGreaterThan(0)
     expect(mockDeleteProduct).toHaveBeenCalledWith(1)
   })
 
@@ -158,7 +158,7 @@ describe('Products', () => {
     )
 
     await waitFor(() => {
-      expect(screen.getByText('Produto 1')).toBeInTheDocument()
+      expect(screen.getAllByText('Produto 1').length).toBeGreaterThan(0)
     })
 
     const user = userEvent.setup()

@@ -40,7 +40,7 @@ describe('Products - Testes de Integração', () => {
     )
 
     await waitFor(() => {
-      expect(screen.getByText('Produto 1')).toBeInTheDocument()
+      expect(screen.getAllByText('Produto 1').length).toBeGreaterThan(0)
     })
 
     const user = userEvent.setup()
@@ -57,8 +57,8 @@ describe('Products - Testes de Integração', () => {
     await user.click(submitButton)
 
     await waitFor(() => {
-      expect(screen.getByText('Produto Novo')).toBeInTheDocument()
-      expect(screen.getByText('R$ 350,75')).toBeInTheDocument()
+      expect(screen.getAllByText('Produto Novo').length).toBeGreaterThan(0)
+      expect(screen.getAllByText('R$ 350,75').length).toBeGreaterThan(0)
     })
 
     expect(nameInput).toHaveValue('')
@@ -73,8 +73,8 @@ describe('Products - Testes de Integração', () => {
     )
 
     await waitFor(() => {
-      expect(screen.getByText('Produto 1')).toBeInTheDocument()
-      expect(screen.getByText('Produto 2')).toBeInTheDocument()
+      expect(screen.getAllByText('Produto 1').length).toBeGreaterThan(0)
+      expect(screen.getAllByText('Produto 2').length).toBeGreaterThan(0)
     })
 
     const user = userEvent.setup()
@@ -86,7 +86,7 @@ describe('Products - Testes de Integração', () => {
       expect(screen.queryByText('Produto 1')).not.toBeInTheDocument()
     })
 
-    expect(screen.getByText('Produto 2')).toBeInTheDocument()
+    expect(screen.getAllByText('Produto 2').length).toBeGreaterThan(0)
 
     expect(mockDeleteProduct).toHaveBeenCalledWith(1)
   })
@@ -99,7 +99,7 @@ describe('Products - Testes de Integração', () => {
     )
 
     await waitFor(() => {
-      expect(screen.getByText('Produto 1')).toBeInTheDocument()
+      expect(screen.getAllByText('Produto 1').length).toBeGreaterThan(0)
     })
 
     const user = userEvent.setup()
@@ -116,7 +116,9 @@ describe('Products - Testes de Integração', () => {
     await user.click(submitButton)
 
     await waitFor(() => {
-      expect(screen.getByText('Produto Temporário')).toBeInTheDocument()
+      expect(screen.getAllByText('Produto Temporário').length).toBeGreaterThan(
+        0
+      )
     })
 
     const deleteButtons = screen.getAllByRole('button', { name: /excluir/i })
@@ -127,7 +129,7 @@ describe('Products - Testes de Integração', () => {
       expect(screen.queryByText('Produto Temporário')).not.toBeInTheDocument()
     })
 
-    expect(screen.getByText('Produto 1')).toBeInTheDocument()
-    expect(screen.getByText('Produto 2')).toBeInTheDocument()
+    expect(screen.getAllByText('Produto 1').length).toBeGreaterThan(0)
+    expect(screen.getAllByText('Produto 2').length).toBeGreaterThan(0)
   })
 })
