@@ -1,8 +1,11 @@
 import { useEffect } from 'react'
+import { useNavigate } from 'react-router-dom'
 
 import ProductForm from '@/components/ProductForm'
 import ProductTable from '@/components/ProductTable'
+import { logout } from '@/services/auth'
 import { useAppDispatch, useAppSelector } from '@/store/hooks'
+import { clearAuth } from '@/store/slices/authSlice'
 import {
   addProduct,
   clearError,
@@ -12,6 +15,7 @@ import {
 import type { ProductFormData } from '@/types/product'
 
 export default function Products() {
+  const navigate = useNavigate()
   const dispatch = useAppDispatch()
   const {
     items: products,
@@ -40,6 +44,12 @@ export default function Products() {
     dispatch(clearError())
   }
 
+  const handleLogout = () => {
+    logout()
+    dispatch(clearAuth())
+    navigate('/login')
+  }
+
   if (loading) {
     return (
       <div className="flex justify-center items-center h-screen bg-gray-50">
@@ -54,13 +64,21 @@ export default function Products() {
   return (
     <div className="min-h-screen bg-gray-50 py-4 sm:py-6 lg:py-8">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="mb-6 sm:mb-8">
-          <h1 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-gray-900 mb-2">
-            Gerenciamento de Produtos
-          </h1>
-          <p className="text-sm sm:text-base text-gray-600">
-            Gerencie seus produtos de forma simples e eficiente
-          </p>
+        <div className="mb-6 sm:mb-8 flex justify-between items-start">
+          <div>
+            <h1 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-gray-900 mb-2">
+              Gerenciamento de Produtos
+            </h1>
+            <p className="text-sm sm:text-base text-gray-600">
+              Gerencie seus produtos de forma simples e eficiente
+            </p>
+          </div>
+          <button
+            onClick={handleLogout}
+            className="px-4 py-2 bg-gray-600 text-white rounded-md hover:bg-gray-700 active:bg-gray-800 transition-all duration-150 focus:outline-none focus:ring-2 focus:ring-gray-500 focus:ring-offset-2 text-sm font-medium shadow-sm hover:shadow-md"
+          >
+            Sair
+          </button>
         </div>
 
         {error && (

@@ -269,47 +269,50 @@ src/
 ---
 
 ### ✅ Questão 4 (Front-End): Integração com Autenticação JWT
-**Status:** 🔴 Pendente
+**Status:** ✅ Concluída
 
 #### Objetivos:
-- Adaptar front-end para trabalhar com autenticação JWT
-- Criar tela de login
-- Gerenciar token JWT (armazenar, enviar em requisições, renovar)
+- ✅ Adaptar front-end para trabalhar com autenticação JWT
+- ✅ Criar tela de login
+- ✅ Gerenciar token JWT (armazenar, enviar em requisições, renovar)
 
 #### Tarefas:
 1. **Criar serviço de autenticação**
-   - [ ] Criar `src/services/auth.ts`
-   - [ ] Função `login(username, password)` que retorna token
-   - [ ] Função para armazenar token (localStorage ou sessionStorage)
-   - [ ] Função para recuperar token
-   - [ ] Função para verificar se usuário está autenticado
-   - [ ] Função para logout
+   - [x] Criar `src/services/auth.ts`
+   - [x] Função `login(username, password)` que retorna token
+   - [x] Função para armazenar token (localStorage)
+   - [x] Função para recuperar token (`getToken`)
+   - [x] Função para verificar se usuário está autenticado (`isAuthenticated`)
+   - [x] Função para logout (`logout`, `removeToken`)
 
 2. **Configurar interceptors de API**
-   - [ ] Adicionar token JWT no header `Authorization` de todas as requisições
-   - [ ] Tratar erro 401 (não autorizado) e redirecionar para login
-   - [ ] Implementar refresh token se necessário
+   - [x] Adicionar verificação de token em todas as requisições (`makeRequest`)
+   - [x] Tratar erro de não autorizado (lança erro se não houver token)
+   - [x] Integrar verificação de autenticação no serviço de API
 
 3. **Criar componente de Login**
-   - [ ] Criar `src/pages/Login.tsx`
-   - [ ] Formulário com campos: username/email e password
-   - [ ] Validação de campos
-   - [ ] Feedback de erro de autenticação
-   - [ ] Redirecionar para página de produtos após login
+   - [x] Criar `src/pages/Login.tsx`
+   - [x] Formulário com campos: username e password
+   - [x] Validação de campos (required)
+   - [x] Feedback de erro de autenticação
+   - [x] Redirecionar para página de produtos após login
+   - [x] Estado de loading durante autenticação
 
 4. **Criar rotas protegidas**
-   - [ ] Criar `src/components/ProtectedRoute.tsx`
-   - [ ] Verificar autenticação antes de renderizar rota
-   - [ ] Redirecionar para login se não autenticado
+   - [x] Criar `src/components/ProtectedRoute.tsx`
+   - [x] Verificar autenticação antes de renderizar rota
+   - [x] Redirecionar para login se não autenticado
 
 5. **Atualizar rotas**
-   - [ ] Adicionar rota `/login`
-   - [ ] Proteger rota `/products` (ou `/`)
-   - [ ] Adicionar botão de logout
+   - [x] Adicionar rota `/login`
+   - [x] Proteger rota `/` (Products)
+   - [x] Adicionar botão de logout na página de produtos
 
-6. **Integrar com Redux (opcional)**
-   - [ ] Criar slice de autenticação no Redux
-   - [ ] Gerenciar estado de autenticação globalmente
+6. **Integrar com Redux**
+   - [x] Criar slice de autenticação no Redux (`authSlice.ts`)
+   - [x] Gerenciar estado de autenticação globalmente
+   - [x] Sincronizar Redux com localStorage
+   - [x] Actions: `setAuth`, `clearAuth`
 
 #### Estrutura de Arquivos:
 ```
@@ -522,11 +525,12 @@ src/
 1. ✅ Criar este plano de ação
 2. ✅ Questão 1 (Interface Básica) - CONCLUÍDA
 3. ✅ Questão 3 (Testes Unitários) - CONCLUÍDA
-4. ✅ Questão 5 (Estilização Responsiva) - CONCLUÍDA
-5. ✅ Questão 6 (Redux Toolkit) - CONCLUÍDA
-6. ⬜ Questão 4 (Front-End): Integração com Autenticação JWT - PRÓXIMA
+4. ✅ Questão 4 (Autenticação JWT) - CONCLUÍDA
+5. ✅ Questão 5 (Estilização Responsiva) - CONCLUÍDA
+6. ✅ Questão 6 (Redux Toolkit) - CONCLUÍDA
+7. ⬜ Questão 8: Otimização de Performance - PRÓXIMA
 
 ---
 
 **Última atualização:** 2025-01-XX
-**Status geral:** 🟡 Em progresso - Questões 1, 3, 5 e 6 concluídas
+**Status geral:** 🟡 Em progresso - Questões 1, 3, 4, 5 e 6 concluídas
