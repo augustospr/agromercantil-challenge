@@ -18,7 +18,6 @@
   "dependencies": {
     "@reduxjs/toolkit": "^2.11.2",
     "@tailwindcss/vite": "^4.1.8",
-    "@types/react-window": "^1.8.8",
     "i18next": "^25.6.3",
     "react": "^19.2.0",
     "react-dom": "^19.2.0",

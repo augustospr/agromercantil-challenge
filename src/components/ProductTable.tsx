@@ -1,9 +1,10 @@
 import { useCallback, useMemo } from 'react'
-import { FixedSizeList as List } from 'react-window'
+import { List } from 'react-window'
+
+import type { Product } from '@/types/product'
 
 import ProductCard from './ProductCard'
 import ProductRow from './ProductRow'
-import type { Product } from '@/types/product'
 
 interface ProductTableProps {
   products: Product[]
@@ -150,26 +151,24 @@ export default function ProductTable({
               </div>
             </div>
           </div>
-          <List
-            height={listHeight}
-            itemCount={products.length}
-            itemSize={ROW_HEIGHT}
-            width="100%"
-          >
-            {DesktopRow}
-          </List>
+          <List<Record<string, never>>
+            rowComponent={DesktopRow}
+            rowCount={products.length}
+            rowHeight={ROW_HEIGHT}
+            rowProps={{}}
+            style={{ height: listHeight }}
+          />
         </div>
       </div>
 
       <div className="md:hidden">
-        <List
-          height={cardListHeight}
-          itemCount={products.length}
-          itemSize={CARD_HEIGHT}
-          width="100%"
-        >
-          {MobileRow}
-        </List>
+        <List<Record<string, never>>
+          rowComponent={MobileRow}
+          rowCount={products.length}
+          rowHeight={CARD_HEIGHT}
+          rowProps={{}}
+          style={{ height: cardListHeight }}
+        />
       </div>
     </>
   )
