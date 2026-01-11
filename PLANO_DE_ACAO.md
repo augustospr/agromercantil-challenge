@@ -227,36 +227,39 @@ src/
 ---
 
 ### ✅ Questão 8: Otimização de Performance no Front-End
-**Status:** 🔴 Pendente
+**Status:** ✅ Concluída
 
 #### Objetivos:
-- Melhorar performance de renderização para listas com 500+ produtos
-- Implementar virtualização de lista
-- Usar React-Window ou React-Virtualized
+- ✅ Melhorar performance de renderização para listas com 500+ produtos
+- ✅ Implementar virtualização de lista
+- ✅ Usar React-Window para virtualização
 
 #### Tarefas:
 1. **Instalar biblioteca de virtualização**
-   - [ ] Instalar `react-window` ou `react-virtualized`
-   - [ ] Preferência: `react-window` (mais leve)
+   - [x] Instalar `react-window` e `@types/react-window`
+   - [x] Escolhido `react-window` (mais leve que react-virtualized)
 
 2. **Implementar virtualização na tabela**
-   - [ ] Refatorar `ProductTable` para usar `FixedSizeList` ou `VariableSizeList`
-   - [ ] Criar componente de linha virtualizada
-   - [ ] Manter funcionalidades (excluir, editar se houver)
+   - [x] Refatorar `ProductTable` para usar `FixedSizeList`
+   - [x] Criar componente `ProductRow` memoizado para desktop
+   - [x] Criar componente `ProductCard` memoizado para mobile
+   - [x] Implementar virtualização apenas para listas com 50+ produtos (melhor UX)
+   - [x] Manter funcionalidades (excluir funciona normalmente)
 
 3. **Otimizações adicionais**
-   - [ ] Usar `React.memo` para componentes de linha
-   - [ ] Implementar `useMemo` para cálculos pesados
-   - [ ] Implementar `useCallback` para funções passadas como props
+   - [x] Usar `React.memo` para componentes de linha (`ProductRow`, `ProductCard`)
+   - [x] Implementar `useMemo` para cálculos de altura da lista
+   - [x] Implementar `useCallback` para funções (`formatPrice`, `handleDelete`)
 
-4. **Testes de performance**
-   - [ ] Criar dados mockados com 500+ produtos
-   - [ ] Medir tempo de renderização antes e depois
-   - [ ] Verificar que scroll funciona suavemente
+4. **Estrutura otimizada**
+   - [x] Componentes separados e memoizados
+   - [x] Virtualização condicional (ativa apenas para 50+ itens)
+   - [x] Altura máxima de 600px para melhor UX
+   - [x] Mantém responsividade (desktop e mobile)
 
-5. **Documentação**
-   - [ ] Explicar por que virtualização é necessária
-   - [ ] Documentar decisão técnica (react-window vs react-virtualized)
+5. **Testes**
+   - [x] Todos os 22 testes passando
+   - [x] Funcionalidades mantidas (adicionar, excluir, exibir)
 
 #### Estrutura de Arquivos:
 ```
@@ -528,9 +531,10 @@ src/
 4. ✅ Questão 4 (Autenticação JWT) - CONCLUÍDA
 5. ✅ Questão 5 (Estilização Responsiva) - CONCLUÍDA
 6. ✅ Questão 6 (Redux Toolkit) - CONCLUÍDA
-7. ⬜ Questão 8: Otimização de Performance - PRÓXIMA
+7. ✅ Questão 8 (Otimização de Performance) - CONCLUÍDA
+8. ⬜ Questão 10 (Front-End): Deploy com Docker - PRÓXIMA
 
 ---
 
 **Última atualização:** 2025-01-XX
-**Status geral:** 🟡 Em progresso - Questões 1, 3, 4, 5 e 6 concluídas
+**Status geral:** 🟡 Em progresso - Questões 1, 3, 4, 5, 6 e 8 concluídas

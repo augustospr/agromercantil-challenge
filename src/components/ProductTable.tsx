@@ -1,3 +1,8 @@
+import { useCallback, useMemo } from 'react'
+import { FixedSizeList as List } from 'react-window'
+
+import ProductCard from './ProductCard'
+import ProductRow from './ProductRow'
 import type { Product } from '@/types/product'
 
 interface ProductTableProps {
@@ -5,16 +10,37 @@ interface ProductTableProps {
   onDelete: (id: number) => void
 }
 
+const ROW_HEIGHT = 73
+const CARD_HEIGHT = 120
+const MAX_HEIGHT = 600
+
 export default function ProductTable({
   products,
   onDelete,
 }: ProductTableProps) {
-  const formatPrice = (price: number): string => {
+  const formatPrice = useCallback((price: number): string => {
     return new Intl.NumberFormat('pt-BR', {
       style: 'currency',
       currency: 'BRL',
     }).format(price)
-  }
+  }, [])
+
+  const handleDelete = useCallback(
+    (id: number) => {
+      onDelete(id)
+    },
+    [onDelete]
+  )
+
+  const listHeight = useMemo(() => {
+    const calculatedHeight = products.length * ROW_HEIGHT
+    return Math.min(calculatedHeight, MAX_HEIGHT)
+  }, [products.length])
+
+  const cardListHeight = useMemo(() => {
+    const calculatedHeight = products.length * CARD_HEIGHT
+    return Math.min(calculatedHeight, MAX_HEIGHT)
+  }, [products.length])
 
   if (products.length === 0) {
     return (
@@ -24,75 +50,126 @@ export default function ProductTable({
     )
   }
 
+  const DesktopRow = ({
+    index,
+    style,
+  }: {
+    index: number
+    style: React.CSSProperties
+  }) => {
+    const product = products[index]
+    return (
+      <div style={style}>
+        <ProductRow
+          product={product}
+          onDelete={handleDelete}
+          formatPrice={formatPrice}
+        />
+      </div>
+    )
+  }
+
+  const MobileRow = ({
+    index,
+    style,
+  }: {
+    index: number
+    style: React.CSSProperties
+  }) => {
+    const product = products[index]
+    return (
+      <div style={{ ...style, paddingBottom: '1rem' }}>
+        <ProductCard
+          product={product}
+          onDelete={handleDelete}
+          formatPrice={formatPrice}
+        />
+      </div>
+    )
+  }
+
+  if (products.length < 50) {
+    return (
+      <>
+        <div className="hidden md:block overflow-x-auto">
+          <table className="min-w-full bg-white border border-gray-200 rounded-lg shadow-sm">
+            <thead className="bg-gray-50">
+              <tr>
+                <th className="px-4 md:px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider border-b border-gray-200">
+                  Nome
+                </th>
+                <th className="px-4 md:px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider border-b border-gray-200">
+                  Preço
+                </th>
+                <th className="px-4 md:px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider border-b border-gray-200">
+                  Ações
+                </th>
+              </tr>
+            </thead>
+            <tbody className="bg-white divide-y divide-gray-200">
+              {products.map(product => (
+                <ProductRow
+                  key={product.id}
+                  product={product}
+                  onDelete={handleDelete}
+                  formatPrice={formatPrice}
+                />
+              ))}
+            </tbody>
+          </table>
+        </div>
+
+        <div className="md:hidden space-y-4">
+          {products.map(product => (
+            <ProductCard
+              key={product.id}
+              product={product}
+              onDelete={handleDelete}
+              formatPrice={formatPrice}
+            />
+          ))}
+        </div>
+      </>
+    )
+  }
+
   return (
     <>
       <div className="hidden md:block overflow-x-auto">
-        <table className="min-w-full bg-white border border-gray-200 rounded-lg shadow-sm">
-          <thead className="bg-gray-50">
-            <tr>
-              <th className="px-4 md:px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider border-b border-gray-200">
+        <div className="bg-white border border-gray-200 rounded-lg shadow-sm">
+          <div className="bg-gray-50 border-b border-gray-200">
+            <div className="grid grid-cols-3 px-4 md:px-6 py-3">
+              <div className="text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
                 Nome
-              </th>
-              <th className="px-4 md:px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider border-b border-gray-200">
+              </div>
+              <div className="text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
                 Preço
-              </th>
-              <th className="px-4 md:px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider border-b border-gray-200">
+              </div>
+              <div className="text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
                 Ações
-              </th>
-            </tr>
-          </thead>
-          <tbody className="bg-white divide-y divide-gray-200">
-            {products.map(product => (
-              <tr
-                key={product.id}
-                className="hover:bg-gray-50 transition-colors duration-150"
-              >
-                <td className="px-4 md:px-6 py-4 text-sm font-medium text-gray-900">
-                  {product.name}
-                </td>
-                <td className="px-4 md:px-6 py-4 text-sm text-gray-700">
-                  {formatPrice(product.price)}
-                </td>
-                <td className="px-4 md:px-6 py-4 text-sm">
-                  <button
-                    onClick={() => onDelete(product.id)}
-                    className="px-3 md:px-4 py-2 bg-red-500 text-white rounded-md hover:bg-red-600 active:bg-red-700 transition-all duration-150 focus:outline-none focus:ring-2 focus:ring-red-500 focus:ring-offset-2 text-sm font-medium shadow-sm hover:shadow-md"
-                    aria-label={`Excluir ${product.name}`}
-                  >
-                    Excluir
-                  </button>
-                </td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
-      </div>
-
-      <div className="md:hidden space-y-4">
-        {products.map(product => (
-          <div
-            key={product.id}
-            className="bg-white border border-gray-200 rounded-lg shadow-sm p-4 hover:shadow-md transition-shadow duration-150"
-          >
-            <div className="flex justify-between items-start mb-3">
-              <div className="flex-1">
-                <h3 className="text-base font-semibold text-gray-900 mb-1">
-                  {product.name}
-                </h3>
-                <p className="text-lg font-medium text-gray-700">
-                  {formatPrice(product.price)}
-                </p>
               </div>
             </div>
-            <button
-              onClick={() => onDelete(product.id)}
-              className="w-full px-4 py-2 bg-red-500 text-white rounded-md hover:bg-red-600 active:bg-red-700 transition-all duration-150 focus:outline-none focus:ring-2 focus:ring-red-500 focus:ring-offset-2 text-sm font-medium shadow-sm"
-              aria-label={`Excluir ${product.name}`}
-            >
-              Excluir
-            </button>
           </div>
-        ))}
+          <List
+            height={listHeight}
+            itemCount={products.length}
+            itemSize={ROW_HEIGHT}
+            width="100%"
+          >
+            {DesktopRow}
+          </List>
+        </div>
+      </div>
+
+      <div className="md:hidden">
+        <List
+          height={cardListHeight}
+          itemCount={products.length}
+          itemSize={CARD_HEIGHT}
+          width="100%"
+        >
+          {MobileRow}
+        </List>
       </div>
     </>
   )
