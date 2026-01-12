@@ -83,8 +83,6 @@ A aplicação estará disponível em `http://localhost:5173`
 npm run build
 ```
 
-Os arquivos otimizados estarão em `dist/`
-
 ### Preview da Build
 
 ```bash
@@ -229,5 +227,3 @@ Este projeto foi desenvolvido como parte de um desafio técnico.
 - Código limpo e manutenível
 
 ---
-
-**Status do Projeto**: ✅ Completo e funcional
