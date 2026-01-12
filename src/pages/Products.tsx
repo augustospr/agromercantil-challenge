@@ -7,8 +7,8 @@ import { logout } from '@/services/auth'
 import { useAppDispatch, useAppSelector } from '@/store/hooks'
 import { clearAuth } from '@/store/slices/authSlice'
 import {
-  addProduct,
   clearError,
+  createProductAsync,
   deleteProductAsync,
   fetchProductsAsync,
 } from '@/store/slices/productsSlice'
@@ -32,12 +32,7 @@ export default function Products() {
   }
 
   const handleAdd = (formData: ProductFormData) => {
-    const newProduct = {
-      id: Date.now(),
-      name: formData.name,
-      price: formData.price,
-    }
-    dispatch(addProduct(newProduct))
+    dispatch(createProductAsync({ name: formData.name, price: formData.price }))
   }
 
   const handleClearError = () => {

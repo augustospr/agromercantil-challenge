@@ -108,27 +108,31 @@ export default function ProductTable({
               </tr>
             </thead>
             <tbody className="bg-white divide-y divide-gray-200">
-              {products.map(product => (
-                <ProductRow
-                  key={product.id}
-                  product={product}
-                  onDelete={handleDelete}
-                  formatPrice={formatPrice}
-                />
-              ))}
+              {products
+                .filter(product => product != null)
+                .map(product => (
+                  <ProductRow
+                    key={product.id}
+                    product={product}
+                    onDelete={handleDelete}
+                    formatPrice={formatPrice}
+                  />
+                ))}
             </tbody>
           </table>
         </div>
 
         <div className="md:hidden space-y-4">
-          {products.map(product => (
-            <ProductCard
-              key={product.id}
-              product={product}
-              onDelete={handleDelete}
-              formatPrice={formatPrice}
-            />
-          ))}
+          {products
+            .filter(product => product != null)
+            .map(product => (
+              <ProductCard
+                key={product.id}
+                product={product}
+                onDelete={handleDelete}
+                formatPrice={formatPrice}
+              />
+            ))}
         </div>
       </>
     )

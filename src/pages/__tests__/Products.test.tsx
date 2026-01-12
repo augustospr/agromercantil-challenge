@@ -13,10 +13,12 @@ import Products from '../Products'
 vi.mock('@/services/api', () => ({
   fetchProducts: vi.fn(),
   deleteProduct: vi.fn(),
+  createProduct: vi.fn(),
 }))
 
 const mockFetchProducts = vi.mocked(api.fetchProducts)
 const mockDeleteProduct = vi.mocked(api.deleteProduct)
+const mockCreateProduct = vi.mocked(api.createProduct)
 
 const Wrapper = ({ children }: { children: React.ReactNode }) => (
   <Provider store={store}>
@@ -32,6 +34,8 @@ describe('Products', () => {
 
   beforeEach(() => {
     vi.clearAllMocks()
+    mockFetchProducts.mockResolvedValue(mockProducts)
+    mockDeleteProduct.mockResolvedValue(undefined)
   })
 
   it('carrega produtos ao montar', async () => {
@@ -92,7 +96,8 @@ describe('Products', () => {
   })
 
   it('adiciona novo produto à lista', async () => {
-    mockFetchProducts.mockResolvedValue(mockProducts)
+    const newProduct: Product = { id: 3, name: 'Produto Novo', price: 300.0 }
+    mockCreateProduct.mockResolvedValue(newProduct)
 
     render(
       <Wrapper>
@@ -120,9 +125,9 @@ describe('Products', () => {
       expect(screen.getAllByText('Produto Novo').length).toBeGreaterThan(0)
     })
 
+    expect(mockCreateProduct).toHaveBeenCalledWith('Produto Novo', 300)
     expect(screen.getAllByText('Produto 1').length).toBeGreaterThan(0)
     expect(screen.getAllByText('Produto 2').length).toBeGreaterThan(0)
-    expect(screen.getAllByText('Produto Novo').length).toBeGreaterThan(0)
   })
 
   it('remove produto da lista', async () => {

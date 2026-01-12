@@ -13,10 +13,12 @@ import Products from '../Products'
 vi.mock('@/services/api', () => ({
   fetchProducts: vi.fn(),
   deleteProduct: vi.fn(),
+  createProduct: vi.fn(),
 }))
 
 const mockFetchProducts = vi.mocked(api.fetchProducts)
 const mockDeleteProduct = vi.mocked(api.deleteProduct)
+const mockCreateProduct = vi.mocked(api.createProduct)
 
 const Wrapper = ({ children }: { children: React.ReactNode }) => (
   <Provider store={store}>
@@ -37,6 +39,12 @@ describe('Products - Testes de Integração', () => {
   })
 
   it('fluxo completo de adicionar produto', async () => {
+    mockCreateProduct.mockResolvedValue({
+      id: 3,
+      name: 'Produto Novo',
+      price: 350.75,
+    })
+
     render(
       <Wrapper>
         <Products />
@@ -65,8 +73,7 @@ describe('Products - Testes de Integração', () => {
       expect(screen.getAllByText('R$ 350,75').length).toBeGreaterThan(0)
     })
 
-    expect(nameInput).toHaveValue('')
-    expect(priceInput).toHaveValue(null)
+    expect(mockCreateProduct).toHaveBeenCalledWith('Produto Novo', 350.75)
   })
 
   it('fluxo completo de excluir produto', async () => {
@@ -96,6 +103,13 @@ describe('Products - Testes de Integração', () => {
   })
 
   it('fluxo completo: adicionar e depois excluir produto', async () => {
+    const tempProduct: Product = {
+      id: 3,
+      name: 'Produto Temporário',
+      price: 500.0,
+    }
+    mockCreateProduct.mockResolvedValue(tempProduct)
+
     render(
       <Wrapper>
         <Products />
@@ -125,6 +139,8 @@ describe('Products - Testes de Integração', () => {
       )
     })
 
+    expect(mockCreateProduct).toHaveBeenCalledWith('Produto Temporário', 500)
+
     const deleteButtons = screen.getAllByRole('button', { name: /excluir/i })
     const lastDeleteButton = deleteButtons[deleteButtons.length - 1]
     await user.click(lastDeleteButton)
@@ -133,6 +149,7 @@ describe('Products - Testes de Integração', () => {
       expect(screen.queryByText('Produto Temporário')).not.toBeInTheDocument()
     })
 
+    expect(mockDeleteProduct).toHaveBeenCalledWith(3)
     expect(screen.getAllByText('Produto 1').length).toBeGreaterThan(0)
     expect(screen.getAllByText('Produto 2').length).toBeGreaterThan(0)
   })

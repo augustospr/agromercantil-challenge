@@ -1,6 +1,6 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit'
 
-import { deleteProduct, fetchProducts } from '@/services/api'
+import { createProduct, deleteProduct, fetchProducts } from '@/services/api'
 import type { Product } from '@/types/product'
 
 interface ProductsState {
@@ -28,6 +28,14 @@ export const deleteProductAsync = createAsyncThunk(
   async (id: number) => {
     await deleteProduct(id)
     return id
+  }
+)
+
+export const createProductAsync = createAsyncThunk(
+  'products/createProduct',
+  async (data: { name: string; price: number }) => {
+    const product = await createProduct(data.name, data.price)
+    return product
   }
 )
 
@@ -67,6 +75,18 @@ const productsSlice = createSlice({
       .addCase(deleteProductAsync.rejected, state => {
         state.loading = false
         state.error = 'Erro ao excluir produto. Tente novamente.'
+      })
+      .addCase(createProductAsync.pending, state => {
+        state.loading = true
+        state.error = null
+      })
+      .addCase(createProductAsync.fulfilled, (state, action) => {
+        state.loading = false
+        state.items.push(action.payload)
+      })
+      .addCase(createProductAsync.rejected, state => {
+        state.loading = false
+        state.error = 'Erro ao criar produto. Tente novamente.'
       })
   },
 })
